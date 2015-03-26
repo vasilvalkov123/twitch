@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        TextView game,viewers;
+        TextView game,viewers, quality;
 
         private String url = "https://api.twitch.tv/kraken/streams/stormstudio_d2cl_ru";
 
@@ -70,6 +70,7 @@ public class MainActivity extends ActionBarActivity {
 
             game = (TextView) rootView.findViewById(R.id.game_name);
             viewers = (TextView) rootView.findViewById(R.id.game_viewers);
+            quality = (TextView) rootView.findViewById(R.id.game_quality);
 
             new JSONParse().execute();
 
@@ -100,16 +101,18 @@ public class MainActivity extends ActionBarActivity {
                 assert object != null;
                 String game_name = null;
                 String  game_viewers = null;
+                String  game_quality = null;
                 try {
                     game_name = object.getString("game");
                     game_viewers = object.getString("viewers");
+                    game_quality = object.getString("video_height");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 game.setText(game_name);
                 viewers.setText(game_viewers);
-
+                quality.setText(game_quality);
             }
         }
     }
